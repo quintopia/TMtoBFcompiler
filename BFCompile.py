@@ -65,7 +65,7 @@ def BFCompile(machine):
 def GenerateStateMachine(states,idx,rejectEdges):
     #base case: we're out of states. assume reject state. (-2 in first cell)
     if idx>=len(states):
-        #Neither Scanner.py nor TuringMachine.py seem to check for transitions to nonexistent states. ¯\_(ツ)_/¯
+        #Neither Scanner.py nor TuringMachine.py seem to check for transitions to nonexistent states. 
         return "<<+[<<<]>>>[-]>>"
     
     #get key for state
