@@ -33,15 +33,16 @@ def BFCompile(machine):
     if machine[1] is not None:
         start=0
         final=''
+        import pdb;pdb.set_trace()
         if machine[1][0]:
-            start = machine[1][0]
+            start = int(machine[1][0])
         if machine[1][1]:
-            final = machine[1][1]
+            final = int(machine[1][1])
         if functions['pipe']:
             output+="["
         
         if final=="":
-            output += "[>+<-]>>>[.>>>]<<<[<<<]>[<+>-]<<"+"+"*10+".>"
+            output += ">>>"*start+("[-]" if start else "[>+<-]")+">>>[.>>>]<<<[<<<]"+("<<<"*start if start else ">[<+>-]<")+"<"+"+"*10+".>"
         else:
             output += ">>>"*(1+start)+".>>>"*(final-start)+"<<<"*(1+final)+"<"+"+"*10+".>"
         if functions['pipe']:
@@ -65,7 +66,7 @@ def BFCompile(machine):
 def GenerateStateMachine(states,idx,rejectEdges):
     #base case: we're out of states. assume reject state. (-2 in first cell)
     if idx>=len(states):
-        #Neither Scanner.py nor TuringMachine.py seem to check for transitions to nonexistent states. 
+        #Neither Scanner.py nor TuringMachine.py seem to check for transitions to nonexistent states.
         return "<<+[<<<]>>>[-]>>"
     
     #get key for state
